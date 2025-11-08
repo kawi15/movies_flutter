@@ -14,7 +14,7 @@ class MovieDetailsPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.grey[50],
       appBar: AppBar(
-        title: const Text('Movie Details'),
+        title: const Text('Movie details'),
       ),
       body: BlocBuilder<MovieDetailsBloc, MovieDetailsState>(
         builder: (context, state) {
