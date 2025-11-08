@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import '../../../data/models/movie_model.dart';
+import '../utils/release_date_formatter.dart';
 
 class MovieCard extends StatelessWidget {
   final MovieModel movie;
@@ -12,16 +12,6 @@ class MovieCard extends StatelessWidget {
     required this.movie,
     required this.onTap,
   });
-
-  String _formatReleaseDate(String? dateStr) {
-    if (dateStr == null || dateStr.isEmpty) return 'No release date';
-    try {
-      final date = DateTime.parse(dateStr);
-      return DateFormat('d MMMM yyyy', 'en_US').format(date);
-    } catch (_) {
-      return dateStr;
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +81,7 @@ class MovieCard extends StatelessWidget {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      _formatReleaseDate(movie.releaseDate),
+                      formatReleaseDate(movie.releaseDate),
                       style: TextStyle(
                         fontSize: 16,
                         color: Colors.grey[600]

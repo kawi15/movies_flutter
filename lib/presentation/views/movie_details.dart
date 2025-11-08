@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies/presentation/utils/release_date_formatter.dart';
 
 import '../blocs/movie_details/movie_details_bloc.dart';
 
@@ -11,7 +12,10 @@ class MovieDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Movie Details')),
+      backgroundColor: Colors.grey[50],
+      appBar: AppBar(
+        title: const Text('Movie Details'),
+      ),
       body: BlocBuilder<MovieDetailsBloc, MovieDetailsState>(
         builder: (context, state) {
           if (state is MovieDetailsLoading) {
@@ -24,15 +28,71 @@ class MovieDetailsPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   if (movie.posterPath != null)
-                    CachedNetworkImage(
-                      imageUrl: 'https://image.tmdb.org/t/p/w500${movie.posterPath}',
-                      progressIndicatorBuilder: (context, _, __) => Center(child: CircularProgressIndicator()),
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black26,
+                            blurRadius: 8,
+                            offset: const Offset(0, 4),
+                          ),
+                        ],
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(16),
+                        child: CachedNetworkImage(
+                          imageUrl:
+                          'https://image.tmdb.org/t/p/w500${movie.posterPath}',
+                          placeholder: (context, url) => Container(
+                            height: 300,
+                            color: Colors.grey[300],
+                            child: const Center(
+                                child: CircularProgressIndicator()),
+                          ),
+                          errorWidget: (context, url, error) =>
+                              Container(
+                                height: 300,
+                                color: Colors.grey[300],
+                                child: const Icon(Icons.broken_image, size: 50),
+                              ),
+                        ),
+                      ),
                     ),
-                  const SizedBox(height: 12),
-                  Text(movie.title,
-                      style: Theme.of(context).textTheme.headlineSmall),
+                  const SizedBox(height: 16),
+                  Text(
+                    movie.title,
+                    style: TextStyle(
+                      fontSize: 32,
+                      fontWeight: FontWeight.bold
+                    )
+                  ),
                   const SizedBox(height: 8),
-                  Text(movie.overview ?? 'No description available'),
+                  if (movie.releaseDate != null && movie.releaseDate!.isNotEmpty)
+                    Text(
+                      '📅 ${formatReleaseDate(movie.releaseDate!)}',
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.grey[600]
+                      ),
+                    ),
+                  const SizedBox(height: 16),
+                  if (movie.overview != null && movie.overview!.isNotEmpty)
+                    Text(
+                      movie.overview!,
+                      style: TextStyle(
+                        fontSize: 16,
+                        height: 1.5
+                      ),
+                    )
+                  else
+                    Text(
+                      'No description available.',
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyMedium
+                          ?.copyWith(color: Colors.grey[600]),
+                    ),
                 ],
               ),
             );
