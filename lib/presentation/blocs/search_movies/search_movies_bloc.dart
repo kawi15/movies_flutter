@@ -1,4 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies/data/services/movies_service.dart';
+import '../../../core/exceptions/api_exceptions.dart';
 import '../../../data/models/movie_model.dart';
 import '../../../data/repositories/movies_repository.dart';
 
@@ -21,10 +23,11 @@ class SearchMoviesBloc extends Bloc<SearchMoviesEvent, SearchMoviesState> {
       _movies.clear();
 
       try {
-        final results =
-        await repository.searchMovies(event.query, page: _currentPage);
+        final results = await repository.searchMovies(event.query, page: _currentPage);
         _movies.addAll(results);
         emit(SearchMoviesLoaded(List.from(_movies), hasMore: results.isNotEmpty));
+      } on UnauthorizedApiKeyException {
+        emit(SearchMoviesError('❌ Invalid API key. Please check your key.'));
       } catch (e) {
         emit(SearchMoviesError(e.toString()));
       }

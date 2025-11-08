@@ -88,10 +88,22 @@ class _HomePageState extends State<HomePage> {
                         },
                       );
                     } else if (state is SearchMoviesError) {
-                      return Center(child: Text(state.message));
+                      return Center(
+                          child: Text(
+                            state.message,
+                            style: TextStyle(
+                              fontSize: 16
+                            ),
+                          )
+                      );
                     }
                     return const Center(
-                      child: Text('Search for a movie'),
+                      child: Text(
+                        'Search for a movie',
+                        style: TextStyle(
+                            fontSize: 16
+                        ),
+                      ),
                     );
                   },
                 ),
