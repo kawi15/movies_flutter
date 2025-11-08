@@ -12,12 +12,15 @@ class MovieCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       leading: movie.posterPath != null
-          ? CachedNetworkImage(
-                  imageUrl: 'https://image.tmdb.org/t/p/w92${movie.posterPath}',
-        progressIndicatorBuilder: (context, _, __) => Center(child: CircularProgressIndicator()),
-                  width: 50,
-                  fit: BoxFit.cover,
-                )
+          ? ClipRRect(
+            borderRadius: BorderRadius.circular(12),
+            child: CachedNetworkImage(
+                    imageUrl: 'https://image.tmdb.org/t/p/w92${movie.posterPath}',
+                    progressIndicatorBuilder: (context, _, __) => Center(child: CircularProgressIndicator()),
+                    width: 50,
+                    fit: BoxFit.cover,
+                  ),
+          )
           : const Icon(Icons.movie),
       title: Text(movie.title),
       subtitle: Text(movie.releaseDate ?? ''),
