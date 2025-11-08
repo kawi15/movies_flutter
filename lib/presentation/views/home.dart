@@ -66,6 +66,9 @@ class _HomePageState extends State<HomePage> {
                     if (state is SearchMoviesLoading) {
                       return const Center(child: CircularProgressIndicator());
                     } else if (state is SearchMoviesLoaded) {
+                      if (state.movies.isEmpty) {
+                        return Center(child: Text('No movies found'));
+                      }
                       return ListView.builder(
                         controller: _scrollController,
                         itemCount: state.movies.length + 1,
