@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -23,8 +24,9 @@ class MovieDetailsPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   if (movie.posterPath != null)
-                    Image.network(
-                      'https://image.tmdb.org/t/p/w500${movie.posterPath}',
+                    CachedNetworkImage(
+                      imageUrl: 'https://image.tmdb.org/t/p/w500${movie.posterPath}',
+                      progressIndicatorBuilder: (context, _, __) => Center(child: CircularProgressIndicator()),
                     ),
                   const SizedBox(height: 12),
                   Text(movie.title,
