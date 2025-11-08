@@ -1,5 +1,4 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movies/data/services/movies_service.dart';
 import '../../../core/exceptions/api_exceptions.dart';
 import '../../../data/models/movie_model.dart';
 import '../../../data/repositories/movies_repository.dart';
