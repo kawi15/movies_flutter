@@ -1,30 +1,109 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import '../../../data/models/movie_model.dart';
 
 class MovieCard extends StatelessWidget {
   final MovieModel movie;
   final VoidCallback onTap;
 
-  const MovieCard({super.key, required this.movie, required this.onTap});
+  const MovieCard({
+    super.key,
+    required this.movie,
+    required this.onTap,
+  });
+
+  String _formatReleaseDate(String? dateStr) {
+    if (dateStr == null || dateStr.isEmpty) return 'No release date';
+    try {
+      final date = DateTime.parse(dateStr);
+      return DateFormat('d MMMM yyyy', 'en_US').format(date);
+    } catch (_) {
+      return dateStr;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      leading: movie.posterPath != null
-          ? ClipRRect(
-            borderRadius: BorderRadius.circular(12),
-            child: CachedNetworkImage(
-                    imageUrl: 'https://image.tmdb.org/t/p/w92${movie.posterPath}',
-                    progressIndicatorBuilder: (context, _, __) => Center(child: CircularProgressIndicator()),
-                    width: 50,
-                    fit: BoxFit.cover,
+    return Card(
+      margin: const EdgeInsets.symmetric(horizontal: 4, vertical: 6),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
+      elevation: 2,
+      clipBehavior: Clip.hardEdge,
+      child: InkWell(
+        onTap: onTap,
+        child: Row(
+          children: [
+            ClipRRect(
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(12),
+                bottomLeft: Radius.circular(12),
+              ),
+              child: movie.posterPath != null
+                  ? CachedNetworkImage(
+                imageUrl:
+                'https://image.tmdb.org/t/p/w154${movie.posterPath}',
+                width: 100,
+                height: 150,
+                fit: BoxFit.cover,
+                placeholder: (context, url) => Container(
+                  width: 100,
+                  height: 150,
+                  color: Colors.grey[300],
+                  child: const Center(
+                    child: SizedBox(
+                      width: 24,
+                      height: 24,
+                      child: CircularProgressIndicator(strokeWidth: 2),
+                    ),
                   ),
-          )
-          : const Icon(Icons.movie),
-      title: Text(movie.title),
-      subtitle: Text(movie.releaseDate ?? ''),
-      onTap: onTap,
+                ),
+                errorWidget: (context, url, error) => Container(
+                  width: 100,
+                  height: 150,
+                  color: Colors.grey[300],
+                  child: const Icon(Icons.broken_image, size: 40),
+                ),
+              )
+                  : Container(
+                width: 100,
+                height: 150,
+                color: Colors.grey[300],
+                child: const Icon(Icons.movie, size: 40),
+              ),
+            ),
+
+            Expanded(
+              child: Padding(
+                padding:
+                const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      movie.title,
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold
+                      )
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      _formatReleaseDate(movie.releaseDate),
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.grey[600]
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
