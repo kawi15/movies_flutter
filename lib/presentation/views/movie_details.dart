@@ -42,10 +42,9 @@ class MovieDetailsPage extends StatelessWidget {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(16),
                         child: CachedNetworkImage(
-                          imageUrl:
-                          'https://image.tmdb.org/t/p/w500${movie.posterPath}',
+                          imageUrl: 'https://image.tmdb.org/t/p/w500${movie.posterPath}',
                           placeholder: (context, url) => Container(
-                            height: 300,
+                            height: 500,
                             color: Colors.grey[300],
                             child: const Center(
                                 child: CircularProgressIndicator()),
@@ -77,22 +76,13 @@ class MovieDetailsPage extends StatelessWidget {
                       ),
                     ),
                   const SizedBox(height: 16),
-                  if (movie.overview != null && movie.overview!.isNotEmpty)
-                    Text(
-                      movie.overview!,
-                      style: TextStyle(
-                        fontSize: 16,
-                        height: 1.5
-                      ),
-                    )
-                  else
-                    Text(
-                      'No description available.',
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyMedium
-                          ?.copyWith(color: Colors.grey[600]),
+                  Text(
+                    movie.overview ?? 'No description available.',
+                    style: TextStyle(
+                      fontSize: 16,
+                      height: 1.5
                     ),
+                  )
                 ],
               ),
             );
