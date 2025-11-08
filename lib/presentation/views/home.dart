@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies/core/theme/text_styles.dart';
 import 'package:movies/presentation/blocs/movie_details/movie_details_bloc.dart';
 import 'package:movies/presentation/widgets/search_textfield.dart';
 
@@ -91,18 +92,14 @@ class _HomePageState extends State<HomePage> {
                       return Center(
                           child: Text(
                             state.message,
-                            style: TextStyle(
-                              fontSize: 16
-                            ),
+                            style: AppTextStyles.info,
                           )
                       );
                     }
                     return const Center(
                       child: Text(
                         'Search for a movie',
-                        style: TextStyle(
-                            fontSize: 16
-                        ),
+                        style: AppTextStyles.info,
                       ),
                     );
                   },

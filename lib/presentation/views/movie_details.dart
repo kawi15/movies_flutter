@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies/core/theme/text_styles.dart';
 import 'package:movies/presentation/utils/release_date_formatter.dart';
 
 import '../blocs/movie_details/movie_details_bloc.dart';
@@ -61,33 +62,27 @@ class MovieDetailsPage extends StatelessWidget {
                   const SizedBox(height: 16),
                   Text(
                     movie.title,
-                    style: TextStyle(
-                      fontSize: 32,
-                      fontWeight: FontWeight.bold
-                    )
+                    style: AppTextStyles.detailsTitle
                   ),
                   const SizedBox(height: 8),
                   if (movie.releaseDate != null && movie.releaseDate!.isNotEmpty)
                     Text(
                       '📅 ${formatReleaseDate(movie.releaseDate!)}',
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.grey[600]
-                      ),
+                      style: AppTextStyles.detailsDate,
                     ),
                   const SizedBox(height: 16),
                   Text(
                     movie.overview ?? 'No description available.',
-                    style: TextStyle(
-                      fontSize: 16,
-                      height: 1.5
-                    ),
+                    style: AppTextStyles.overview,
                   )
                 ],
               ),
             );
           } else if (state is MovieDetailsError) {
-            return Center(child: Text(state.message));
+            return Center(child: Text(
+              state.message,
+              style: AppTextStyles.info,
+            ));
           }
           return const SizedBox.shrink();
         },

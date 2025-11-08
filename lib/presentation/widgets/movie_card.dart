@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:movies/core/theme/text_styles.dart';
 import '../../../data/models/movie_model.dart';
 import '../utils/release_date_formatter.dart';
 
@@ -74,18 +75,12 @@ class MovieCard extends StatelessWidget {
                   children: [
                     Text(
                       movie.title,
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold
-                      )
+                      style: AppTextStyles.listTitle
                     ),
                     const SizedBox(height: 8),
                     Text(
                       formatReleaseDate(movie.releaseDate),
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.grey[600]
-                      ),
+                      style: AppTextStyles.listDate,
                     ),
                   ],
                 ),
