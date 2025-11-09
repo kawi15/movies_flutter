@@ -25,4 +25,4 @@ TMDB_ACCESS_TOKEN=your_access_token_here
 ```
 
 
-🔒 You can get these values from your TMDB account settings.
+🔒 You can get these values from your [TMDB account settings](https://www.themoviedb.org/settings/api).
