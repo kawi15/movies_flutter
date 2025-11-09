@@ -24,5 +24,11 @@ TMDB_API_KEY=your_api_key_here
 TMDB_ACCESS_TOKEN=your_access_token_here
 ```
 
+4️⃣ Run the app
+
+```
+flutter run
+```
+
 
 🔒 You can get these values from your [TMDB account settings](https://www.themoviedb.org/settings/api).
