@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:movies/core/theme/text_styles.dart';
 import '../../../data/models/movie_model.dart';
-import '../utils/release_date_formatter.dart';
+import '../../core/utils/release_date_formatter.dart';
 
 class MovieCard extends StatelessWidget {
   final MovieModel movie;

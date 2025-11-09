@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies/core/theme/text_styles.dart';
-import 'package:movies/presentation/utils/release_date_formatter.dart';
+import 'package:movies/core/utils/release_date_formatter.dart';
 
 import '../blocs/movie_details/movie_details_bloc.dart';
 
