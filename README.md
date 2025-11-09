@@ -4,13 +4,19 @@ Movies search application
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+1️⃣ Clone the repository
+git clone https://github.com/kawi15/movies_flutter.git
+cd movies_flutter
 
-A few resources to get you started if this is your first Flutter project:
+2️⃣ Install dependencies
+flutter pub get
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+3️⃣ Create the .env file
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+In the project root, create a file named .env and add your TMDB API credentials:
+
+TMDB_API_KEY=your_api_key_here
+TMDB_ACCESS_TOKEN=your_access_token_here
+
+
+🔒 You can get these values from your TMDB account settings.
